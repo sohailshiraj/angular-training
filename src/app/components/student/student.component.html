@@ -1,0 +1,28 @@
+<h3>Students</h3>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of students; let i = index">
+      <th scope="row">{{ i }}</th>
+      <td>{{ student.name }}</td>
+      <td>
+        <button type="button" (click)="viewDetails(i)" class="btn btn-link">
+          View Details
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="currentStudent">
+  <p>Name: {{ currentStudent["name"] }}</p>
+  <p>Age: {{ currentStudent["age"] }}</p>
+  <p>Department: {{ currentStudent["dept"] }}</p>
+</div>
