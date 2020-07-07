@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-student',
@@ -8,17 +9,35 @@ import { Component, OnInit } from '@angular/core';
 export class StudentComponent implements OnInit {
   public students = [];
   public currentStudent;
-  constructor() {
+  public studentForm: FormGroup;
+  public isSubmitted: boolean;
+  constructor(private formbuilder: FormBuilder) {
     this.students = [
       { name: 'Sohail', age: 19, dept: 'Mobility' },
       { name: 'Sohail2', age: 39, dept: 'CRM' },
       { name: 'Sohail3', age: 29, dept: 'QA' }
     ];
+    this.isSubmitted = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.studentForm = this.formbuilder.group({
+      name: ['', [Validators.required]],
+      age: ['', [Validators.required]],
+      dept: ['', [Validators.required]]
+    });
+  }
 
   viewDetails(index) {
     this.currentStudent = this.students[index];
+  }
+
+  onSubmit() {
+    this.isSubmitted = true;
+    if (this.studentForm.valid) {
+      this.students.push(this.studentForm.value);
+      this.studentForm.reset();
+      this.isSubmitted = false;
+    }
   }
 }

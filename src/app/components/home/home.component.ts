@@ -6,10 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  email: string;
+  password: string;
+  checkValue: boolean;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
+    this.email = '';
+    this.password = '';
+    this.checkValue = true;
   }
 
+  ngOnInit(): void {}
+
+  onSubmit() {
+    console.log(
+      `Submitted Values: email - ${this.email} and password - ${this.password} 
+      and check value - ${this.checkValue}`
+    );
+  }
 }
