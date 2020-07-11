@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student',
@@ -11,7 +12,7 @@ export class StudentComponent implements OnInit {
   public currentStudent;
   public studentForm: FormGroup;
   public isSubmitted: boolean;
-  constructor(private formbuilder: FormBuilder) {
+  constructor(private formbuilder: FormBuilder, private router: Router) {
     this.students = [
       { name: 'Sohail', age: 19, dept: 'Mobility' },
       { name: 'Sohail2', age: 39, dept: 'CRM' },
@@ -29,7 +30,9 @@ export class StudentComponent implements OnInit {
   }
 
   viewDetails(index) {
-    this.currentStudent = this.students[index];
+    this.router.navigate(['student-detail'], {
+      queryParams: this.students[index]
+    });
   }
 
   onSubmit() {
