@@ -8,7 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { StudentComponent } from './components/student/student.component';
 import { HomeComponent } from './components/home/home.component';
 import { StudentDetailComponent } from './components/student-detail/student-detail.component';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +18,13 @@ import { StudentDetailComponent } from './components/student-detail/student-deta
     HomeComponent,
     StudentDetailComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

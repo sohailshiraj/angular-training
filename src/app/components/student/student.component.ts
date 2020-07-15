@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-student',
@@ -12,20 +13,28 @@ export class StudentComponent implements OnInit {
   public currentStudent;
   public studentForm: FormGroup;
   public isSubmitted: boolean;
-  constructor(private formbuilder: FormBuilder, private router: Router) {
-    this.students = [
-      { name: 'Sohail', age: 19, dept: 'Mobility' },
-      { name: 'Sohail2', age: 39, dept: 'CRM' },
-      { name: 'Sohail3', age: 29, dept: 'QA' }
-    ];
+  constructor(
+    private formbuilder: FormBuilder,
+    private router: Router,
+    private httpService: HttpService
+  ) {
+    this.students = [];
     this.isSubmitted = false;
   }
 
   ngOnInit(): void {
     this.studentForm = this.formbuilder.group({
-      name: ['', [Validators.required]],
-      age: ['', [Validators.required]],
-      dept: ['', [Validators.required]]
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
+      email: ['', [Validators.required]]
+    });
+
+    this.getStudents();
+  }
+
+  getStudents() {
+    this.httpService.get('users').subscribe((res: any) => {
+      this.students = res.data;
     });
   }
 
